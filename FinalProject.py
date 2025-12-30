@@ -29,6 +29,13 @@ class PasswordGenerator:
         password = ''.join(secrets.choice(atributes_of_password) for _ in range(length))
         
         return password, length
+    
+    def save_password(self, password, filename="my_password.txt"):
+        with open(filename, 'w', encoding='utf-8') as file:
+            file.write("Ваш пароль:\n")
+            file.write(password)
+        
+        me_password = []
             
 def main():
     
@@ -40,6 +47,7 @@ def main():
         password, length = generator.generate(complexity) #Команда, запускающая процесс генерации в зависимости от выбранной сложности.
         print(f'Длина пароля: {length} символов')
         print(f'Ваш пароль: {password}')
+        generator.save_password(password)
         
     except ValueError as e:
         print('Неизвстный уровень сложности, попробуйте снова')
